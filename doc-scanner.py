@@ -45,9 +45,13 @@ def get_warped(img):
     print('STEP 3: Perspective Transform')
     warped = four_point_transform(img, contours.reshape(4, 2) * ratio)
     warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
-    T = threshold_local(warped, 11, offset = 7, method = 'gaussian')
+    T = threshold_local(warped, 7, offset = 7, method = 'gaussian')
     warped = (warped > T).astype('uint8') * 255
     return warped
+
+def get_thres(img):
+    thresh = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 21, 4)
+    return thresh
 
 edged = get_edged(image)
 contours = get_contours(edged)
@@ -58,10 +62,9 @@ warped = get_warped(origImg)
 
 cv2.drawContours(image, [contours], -1, (0, 255, 0), 3)
 
-
-outputImg = stackImages(0.4, ([origImg, edged], [image, warped]))
+outputImg = stackImages(0.7, ([origImg, edged], [image, warped]))
 cv2.imshow('Output image', outputImg)
-cv2.imwrite('./output/output1.jpg', outputImg)
+cv2.imwrite('./output/output2.jpg', outputImg)
 # cv2.imshow('Original Image', image)
 # cv2.imshow('Edged Image', edged)
 cv2.waitKey(0)
