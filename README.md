@@ -26,7 +26,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![Product Name Screen Shot](https://github.com/nachiketkanore/document-scanner/blob/main/output/output1.jpg)
+![Product Name Screen Shot](https://github.com/nachiketkanore/document-scanner/blob/main/output/output2.jpg)
 
 Simple document scanner app made using OpenCV
 
